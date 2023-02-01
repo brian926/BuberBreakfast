@@ -76,15 +76,7 @@ public class BreakfastsController : ApiController
     [HttpPut("{id:guid}")]
     public IActionResult UpsertBreakfast(Guid id, UpsertBreakfastRequest request)
     {
-        ErrorOr<Breakfast> requestToBreakfastResult = Breakfast.Create(
-            request.Name,
-            request.Description,
-            request.StartDateTime,
-            request.EndDateTime,
-            request.Savory,
-            request.Sweet,
-            id
-            );
+        ErrorOr<Breakfast> requestToBreakfastResult = Breakfast.From(id, request);
 
         if (requestToBreakfastResult.IsError)
         {
